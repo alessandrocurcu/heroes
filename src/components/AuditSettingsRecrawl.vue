@@ -1,0 +1,408 @@
+<script setup lang="ts">
+import useNewProject from '@/composables/useNewProject';
+import BaseTextArea from './baseComponents/TextArea';
+const { newProject } = useNewProject();
+const settings = [
+  {
+    id: 'noRescan',
+    label: 'Recrawl last scanned urls',
+    description: '',
+    default: false,
+    type: 'checkbox',
+    warn: true
+  },
+  {
+    id: 'checkImages',
+    label: 'Check Images',
+    description: '',
+    default: false,
+    type: 'checkbox'
+  },
+  {
+    id: 'checkCss',
+    label: 'Check Css',
+    description: '',
+    default: false,
+    type: 'checkbox'
+  },
+  {
+    id: 'checkJS',
+    label: 'Check Javascript',
+    description: '',
+    default: false,
+    type: 'checkbox'
+  },
+  {
+    id: 'checkSWF',
+    label: 'Check Swf',
+    description: '',
+    default: false,
+    type: 'checkbox'
+  },
+  {
+    id: 'checkExt',
+    label: 'Check External Links',
+    description: '',
+    default: false,
+    type: 'checkbox'
+  },
+  {
+    id: 'checkOutDom',
+    label: 'Check Links Outside the Domain',
+    description: '',
+    default: false,
+    type: 'checkbox'
+  },
+  {
+    id: 'followInt',
+    label: 'Follow Internal "nofollow"',
+    description: '',
+    default: false,
+    type: 'checkbox'
+  },
+  {
+    id: 'followExt',
+    label: 'Follow External "nofollow"',
+    description: '',
+    default: false,
+    type: 'checkbox'
+  },
+  {
+    id: 'crawlAllSubs',
+    label: 'Crawl All SubDomains',
+    description: '',
+    default: false,
+    type: 'checkbox'
+  },
+  {
+    id: 'crawlUsability',
+    label: 'Crawl Accessibility Issues',
+    description: '',
+    default: false,
+    type: 'checkbox'
+  },
+  {
+    id: 'crawlCanon',
+    label: 'Crawl Canonicals',
+    description: '',
+    default: false,
+    type: 'checkbox'
+  },
+  {
+    id: 'crawlNextPrev',
+    label: 'Crawl Next/Prev',
+    description: '',
+    default: false,
+    type: 'checkbox'
+  },
+  {
+    id: 'checkHrefLang',
+    label: 'Check Href-lang',
+    description: '',
+    default: false,
+    type: 'checkbox'
+  },
+  {
+    id: 'crawlHrefLang',
+    label: 'Crawl Href-lang',
+    description: '',
+    default: false,
+    type: 'checkbox'
+  },
+  {
+    id: 'crawlSitemap',
+    label: 'Crawl Links in Sitemaps',
+    description: '',
+    default: false,
+    type: 'checkbox'
+  },
+  {
+    id: 'addSitemaps',
+    label: 'Crawl These Sitemap',
+    description: '',
+    default: '',
+    type: 'textbox'
+  },
+  {
+    id: 'cookies',
+    label: 'Use These Cookies',
+    description: '',
+    default: '',
+    type: 'textbox'
+  },
+  {
+    id: 'maxurl',
+    label: 'Limit Crawl Total',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'maxcrawlerdepth',
+    label: 'Limit Crawl Depth',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'urlsperdepth',
+    label: 'Limit Urls per Depth',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'maxdepth',
+    label: 'Limit Max Folder Depth',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'maxquerystrings',
+    label: 'Limit Number of Query Strings',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'maxdepth',
+    label: 'Limit Max Folder Depth',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'maxurllength',
+    label: 'Max Url Lenght to Crawl',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'maxlinksperurl',
+    label: 'Max Links per URL',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'maxpagesize',
+    label: 'Max Page Size in KB',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'includeUrl',
+    label: 'Include URLs',
+    description: '',
+    default: '',
+    type: 'textarea'
+  },
+  {
+    id: 'excludeUrl',
+    label: 'Exclude URLs',
+    description: '',
+    default: '',
+    type: 'textarea'
+  },
+  {
+    id: 'okRescan',
+    label: 'RegEx',
+    description: '',
+    default: false,
+    type: 'textbox'
+  },
+  {
+    id: 'pixelsMin',
+    label: 'Min Pixels Title',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'pixelsMax',
+    label: 'Max Pixels Title',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'charsMin',
+    label: 'Min Chars Title',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'charsMax',
+    label: 'Max Chars Title',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'pixelsMinDescription',
+    label: 'Min Pixels Description',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'pixelsMaxDescription',
+    label: 'Max Pixels Description',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'charsMinDescription',
+    label: 'Min Chars Description',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'charsMaxDescription',
+    label: 'Max Chars Description',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'pixelsMaxH1',
+    label: 'H1 Chars',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'charsMaxUrl',
+    label: 'Url Lenght Chars',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'charsMaxH2',
+    label: 'H2 Chars',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'charsMaxAlt',
+    label: 'Images ALT Text Chars',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  },
+  {
+    id: 'sizeMaxImages',
+    label: 'Max Kb Images Size',
+    description: '',
+    default: '',
+    type: 'numberbox'
+  }
+];
+
+const itemsUserAgent = [
+  { id: 'BOT', label: 'BOT' },
+  { id: 'PC', label: 'DESKTOP' },
+  { id: 'MOB', label: 'MOBILE' },
+  { id: 'CUSTOM', label: 'CUSTOM' }
+];
+
+const selectUserAgent = (value: any) => {
+  if (value.id === 'CUSTOM') {
+    newProject.value.settings.userAgent = '';
+  } else {
+    newProject.value.settings.userAgent = value.id;
+    newProject.value.agent = value.id;
+  }
+};
+const selectUserAgent2 = (value: any) => {
+  console.log('qui', value);
+  newProject.value.agent = value;
+};
+
+const itemsHasLogin = [
+  { id: 'Y', label: 'Yes' },
+  { id: 'N', label: 'No' }
+];
+
+const selectHasLogin = (value: any) => {
+  if (value.id === 'N') {
+    delete newProject.value.settings.authUser;
+    delete newProject.value.settings.authPassword;
+  }
+};
+</script>
+<template>
+  <div class="mt-1">
+    <!-- <h3 class="mb-2 text-gray-500">Audit Settings</h3> -->
+    <div class="p-8 space-y-2 border border-gray-200 rounded-sm">
+      <BaseRadioGroup
+        :items="itemsHasLogin"
+        v-model="newProject.settings.hasLogin"
+        @change="selectHasLogin"
+        name="hasLogin"
+        label="Is behind login?"
+        help="" />
+      <BaseTextInput
+        v-if="newProject.settings.hasLogin && newProject.settings.hasLogin.id === 'Y'"
+        v-model="newProject.settings.authUser"
+        label="Username"
+        name="authUser" />
+      <BaseTextInput
+        v-if="newProject.settings.hasLogin && newProject.settings.hasLogin.id === 'Y'"
+        v-model="newProject.settings.authPassword"
+        label="Password"
+        name="authPassword" />
+      <BaseRadioGroup
+        :items="itemsUserAgent"
+        v-model="newProject.settings.agent1"
+        name="agent1"
+        @change="selectUserAgent"
+        label="User Agent"
+        help="" />
+      <BaseTextInput
+        v-if="newProject.settings.agent1 && newProject.settings.agent1.id === 'CUSTOM'"
+        v-model="newProject.settings.userAgent"
+        @change="selectUserAgent2"
+        label="Custom User Agent"
+        name="userAgent" />
+      <template v-for="setting in settings" :key="setting.id">
+        <BaseCheckBox
+          v-if="setting.type === 'checkbox'"
+          v-model="newProject.settings[setting.id]"
+          :label="setting.label"
+          :name="setting.id"
+          :help="setting.description" />
+        <div v-if="setting && setting.warn">
+          <BaseMessage kind="warning">
+            <div class="text-xs">
+              Remember to check the "Recrawl last scanned urls" option if you want to recrawl the
+              last scanned urls. You need this to have better data when you compare the issues of
+              different audits.
+            </div>
+          </BaseMessage>
+        </div>
+        <BaseTextInput
+          v-if="setting.type === 'textbox' || setting.type === 'numberbox'"
+          v-model="newProject.settings[setting.id]"
+          :type="setting.type === 'numberbox' ? 'number' : 'text'"
+          :label="setting.label"
+          :name="setting.id"
+          :help="setting.description" />
+        <BaseTextArea
+          v-if="setting.type === 'textarea'"
+          v-model="newProject.settings[setting.id]"
+          :label="setting.label"
+          :name="setting.id"
+          :help="setting.description" />
+      </template>
+    </div>
+  </div>
+</template>

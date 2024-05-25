@@ -1,0 +1,93 @@
+@import 'nprogress/nprogress.css';
+@import 'tailwindcss/base';
+@import 'devextreme/dist/css/dx.light.css';
+@import './devExtreme.css';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+:root {
+  --theNavHight: 52px;
+}
+#app {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.the-nav .router-link-active {
+  @apply bg-indigo-50;
+  @apply text-indigo-900;
+}
+
+.sidebar-nav .router-link-active {
+  @apply bg-indigo-50;
+  @apply ring-1;
+  @apply ring-indigo-200;
+}
+
+.router-link-active {
+  @apply bg-white;
+}
+
+.router-link-active.router-link-exact-active .audit-overview-navigation-link {
+  /* @apply bg-indigo-50; */
+  @apply ring-1;
+  @apply ring-indigo-200;
+}
+
+.kl-dataGrid {
+  @apply text-xs !important;
+  max-height: calc(100dvh - var(--theNavHight));
+}
+.kl-dataGrid-audit {
+  @apply text-xs !important;
+  max-height: calc(100dvh - (var(--theNavHight) + 38px));
+  /* max-width: calc(100vw - 200px); */
+}
+
+.kl-dataGrid-audit .dx-datagrid-header-panel .dx-toolbar {
+  border-top-width: 0px !important;
+}
+
+.disabledLink {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.prose.prose-no-h1 h1 {
+  display: none !important;
+  @apply bg-yellow-400;
+}
+
+.under-construction-bg {
+  background: repeating-linear-gradient(
+    45deg,
+    rgb(250 204 21),
+    rgb(250 204 21) 10px,
+    black 10px,
+    black 20px
+  );
+}
+
+.graph-wrapper {
+  @apply p-4;
+  @apply border;
+  @apply border-gray-200;
+  @apply rounded-md;
+}
+
+#nprogress .spinner {
+  top: 18px !important;
+  left: 185px !important;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: rgb(67 56 202) !important;
+  border-left-color: rgb(67 56 202) !important;
+}
+
+#nprogress .peg {
+  box-shadow:
+    0 0 10px rgb(67 56 202),
+    0 0 5px rgb(67 56 202) !important;
+}
